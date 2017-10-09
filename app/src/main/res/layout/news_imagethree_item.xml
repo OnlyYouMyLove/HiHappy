@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/news_content"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/x10"
+              android:layout_marginRight="@dimen/x10"
+              android:layout_marginTop="@dimen/y8"
+              android:layout_marginBottom="@dimen/y8"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打造中国—东盟命运共同体的重要平台——中国—东盟博览会暨商务与投资峰会成效与展望"
+        android:textColor="#000000"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/y4"
+        android:layout_marginTop="@dimen/y4"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_image01"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/x70"
+            android:layout_marginLeft="-22dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_image02"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/x70"
+            android:layout_marginLeft="-50dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_image03"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/x70"
+            android:layout_marginLeft="-50dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:maxLength="9"
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+</LinearLayout>

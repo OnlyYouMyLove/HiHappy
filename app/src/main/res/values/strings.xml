@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">嗨娱乐</string>
+    <string name="news_tab_content">news</string>
+    <string name="live_tab_content">live</string>
+    <string name="person_tab_content">Person</string>
+    <string name="video_tab_content">video</string>
+    <string name="person_tab_name">我的</string>
+    <string name="live_tab_name">直播</string>
+    <string name="video_tab_name">视频</string>
+    <string name="news_tab_name">新闻</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+       android:insetLeft="@dimen/x10"
+       android:insetRight="@dimen/x10">
+    <!--android:insetLeft="@dimen/x10" 分割线距离左侧x10-->
+    <!--android:insetRight="@dimen/x10" 分割线距离左侧x10-->
+    <shape>
+        <!--分割线的高度，横向的RecyclerView,这里设置宽度即可-->
+        <size android:height="0.5dp"/>
+        <!--分割线的颜色-->
+        <solid android:color="@color/littlegrey"/>
+    </shape>
+
+</inset>

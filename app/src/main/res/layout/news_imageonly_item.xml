@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/y8"
+              android:layout_marginLeft="@dimen/x10"
+              android:layout_marginRight="@dimen/x10"
+              android:layout_marginTop="@dimen/y8"
+              android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginBottom="@dimen/y12"
+            android:id="@+id/tv_title"
+            android:layout_width="@dimen/x200"
+            android:layout_height="wrap_content"
+            android:text="打造中国—东盟命运共同体的重要平台——中国—东盟博览会暨商务与投资峰会成效与展望"
+            android:textColor="#000000"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="新华社"
+                android:id="@+id/tv_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="9"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:text="2017-09-22 18:03"
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x40"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:id="@+id/iv_image01"
+        android:layout_width="@dimen/x140"
+        android:layout_height="@dimen/x70"
+        android:layout_marginLeft="-22dp"
+        android:src="@mipmap/ic_launcher"
+        />
+</LinearLayout>

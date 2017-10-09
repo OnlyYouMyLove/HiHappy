@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorPrimaryTab"></View>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_gravity="bottom"
+        android:background="#05000000"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/home_tab"
+            style="@style/AppTab"
+            android:drawableTop="@drawable/news_tab_selector"
+            android:text="@string/news_tab_name"/>
+
+        <RadioButton
+            android:id="@+id/video_tab"
+            style="@style/AppTab"
+            android:drawableTop="@drawable/video_tab_selector"
+            android:text="@string/video_tab_name"/>
+
+        <RadioButton
+            android:id="@+id/msg_tab"
+            style="@style/AppTab"
+            android:drawableTop="@drawable/live_tab_selectr"
+            android:text="@string/live_tab_name"/>
+
+        <RadioButton
+            android:id="@+id/person_tab"
+            style="@style/AppTab"
+            android:drawableTop="@drawable/person_tab_selector"
+            android:text="@string/person_tab_name"/>
+    </RadioGroup>
+
+</LinearLayout>
