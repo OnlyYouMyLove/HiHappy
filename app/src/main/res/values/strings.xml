@@ -8,4 +8,5 @@
     <string name="live_tab_name">直播</string>
     <string name="video_tab_name">视频</string>
     <string name="news_tab_name">新闻</string>
+    <string name="share">我是标题</string>
 </resources>

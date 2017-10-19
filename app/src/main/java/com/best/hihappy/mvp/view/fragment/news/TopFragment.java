@@ -8,7 +8,7 @@ import com.best.hihappy.R;
 import com.best.hihappy.adapter.NewsAdapter;
 import com.best.hihappy.base.BaseFragment;
 import com.best.hihappy.bean.NewsBean;
-import com.best.hihappy.mvp.presenter.impl.NewsPresenterImpl;
+import com.best.hihappy.mvp.presenter.NewsPresenterImpl;
 import com.best.hihappy.mvp.view.myview.NewsView;
 import com.best.hihappy.utils.ToastUtil;
 import com.best.hihappy.widget.MyDividerItemDecoration;

@@ -86,10 +86,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
                     String url = mNewsBeanList.get(position).getUrl();
+                    String imageUrl = mNewsBeanList.get(position).getThumbnail_pic_s();
+                    String category = mNewsBeanList.get(position).getCategory();
+                    String title = mNewsBeanList.get(position).getTitle();
                     SonicSessionConfig sessionConfig = new SonicSessionConfig.Builder().build();
                     boolean preloadSuccess = SonicEngine.getInstance().preCreateSession(url, sessionConfig);
                     Intent intent = new Intent(mContext, News_WebView.class);
                     intent.putExtra("url", url);
+                    intent.putExtra("imageUrl", imageUrl);
+                    intent.putExtra("category", category);
+                    intent.putExtra("title", title);
                     mContext.startActivity(intent);
                 }
             });
@@ -102,10 +108,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
                     String url = mNewsBeanList.get(position).getUrl();
+                    String imageUrl = mNewsBeanList.get(position).getThumbnail_pic_s();
+                    String category = mNewsBeanList.get(position).getCategory();
+                    String title = mNewsBeanList.get(position).getTitle();
                     SonicSessionConfig sessionConfig = new SonicSessionConfig.Builder().build();
                     boolean preloadSuccess = SonicEngine.getInstance().preCreateSession(url, sessionConfig);
                     Intent intent = new Intent(mContext, News_WebView.class);
                     intent.putExtra("url", url);
+                    intent.putExtra("imageUrl", imageUrl);
+                    intent.putExtra("category", category);
+                    intent.putExtra("title", title);
                     mContext.startActivity(intent);
                 }
             });

@@ -4,8 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.best.hihappy.sonic.SonicRuntimeImpl;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
+import com.mob.MobSDK;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 
@@ -16,19 +15,24 @@ import com.tencent.sonic.sdk.SonicEngine;
 public class MyApplication extends Application {
 
     private static Context mContext;
-    private RefWatcher refWatcher;
+//    private RefWatcher refWatcher;
 
-    public static RefWatcher getRefWatcher(Context context) {
-        MyApplication application = (MyApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }
+//    public static RefWatcher getRefWatcher(Context context) {
+//        MyApplication application = (MyApplication) context.getApplicationContext();
+//        return application.refWatcher;
+//    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        initShareSdk();
         initContext();
-        initLeakCanary();
+//        initLeakCanary();
         initSonic();
+    }
+
+    private void initShareSdk() {
+        MobSDK.init(this, "217ca689007e7", "268d5f53de72600b3212d6d639f5f5e6");
     }
 
     private void initSonic() {
@@ -41,12 +45,12 @@ public class MyApplication extends Application {
         mContext = getApplicationContext();
     }
 
-    protected void initLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return;
-        }
-        refWatcher = LeakCanary.install(this);
-    }
+//    protected void initLeakCanary() {
+//        if (LeakCanary.isInAnalyzerProcess(this)) {
+//            return;
+//        }
+//        refWatcher = LeakCanary.install(this);
+//    }
 
     //单例模式获取上下文
     public static Context getContext() {
