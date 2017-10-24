@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y35">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10"
+            android:padding="10dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="手机号登录"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/y50"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mobile"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_mobileNum"
+            android:layout_width="@dimen/x180"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x10"
+            android:background="@null"
+            android:hint="请输入您的手机号"
+            >
+        </android.support.design.widget.TextInputEditText>
+
+        <ImageView
+            android:id="@+id/iv_cancel_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x50"
+            android:src="@drawable/cancel"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_first"
+        android:layout_width="@dimen/x305"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/littlegrey"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x5"
+            android:src="@drawable/sms"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ed_code"
+            android:layout_width="@dimen/x180"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x10"
+            android:background="@null"
+            android:hint="请输入验证码">
+        </android.support.design.widget.TextInputEditText>
+
+        <TextView
+            android:id="@+id/tv_sendcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:clickable="true"
+            android:text="发送验证码"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_second"
+        android:layout_width="@dimen/x305"
+        android:layout_height="0.5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/littlegrey"></View>
+
+    <Button
+        android:textColor="#50000000"
+        android:textSize="19sp"
+        android:id="@+id/bt_login"
+        android:layout_width="@dimen/x300"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/y20"
+        android:text="验证并登录"/>
+</LinearLayout>

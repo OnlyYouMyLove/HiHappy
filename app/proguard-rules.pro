@@ -74,3 +74,6 @@
 -dontwarn com.mob.**
 -dontwarn cn.sharesdk.**
 -dontwarn **.R$*
+# SMSSDK
+-dontwarn cn.smssdk.**
+-keep class cn.smssdk.**{*;}
