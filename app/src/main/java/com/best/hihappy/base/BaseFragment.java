@@ -46,8 +46,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void LoadData();
 
-    protected void initView() {
-    }
+    protected void initView() {}
 
     @Override
     public void onDestroyView() {

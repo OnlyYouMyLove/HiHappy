@@ -16,4 +16,6 @@ public interface NewsView {
 
     void getNewsData(NewsBean newsBean);
 
+
+
 }

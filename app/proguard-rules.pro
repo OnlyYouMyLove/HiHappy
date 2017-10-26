@@ -62,9 +62,6 @@
   **[] $VALUES;
   public *;
 }
-# for DexGuard only
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
-
 # shareSDK 分享
 -keep class cn.sharesdk.**{*;}
 -keep class com.sina.**{*;}

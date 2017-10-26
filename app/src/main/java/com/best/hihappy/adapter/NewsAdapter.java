@@ -3,7 +3,10 @@ package com.best.hihappy.adapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.tencent.sonic.sdk.SonicEngine;
 import com.tencent.sonic.sdk.SonicSessionConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +34,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private int mLastPosition;
     private static final int IMAGE_ONLY_ONE = 1;
     private static final int IMAGE_TWOORTHREE = 2;
+    private int FOOTTYPE = 3;
+    private boolean hasMore = true;
+    private boolean fadeTips = false;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+    private static final String TAG = "NewsAdapter";
 
-    public NewsAdapter(List<NewsBean.ResultBean.DataBean> newsBeanList, Context context) {
+    public NewsAdapter(List<NewsBean.ResultBean.DataBean> newsBeanList, Context context, boolean hasMore) {
         mNewsBeanList = newsBeanList;
         mContext = context;
+        this.hasMore = hasMore;
     }
 
     static class ImageThreeViewHolder extends RecyclerView.ViewHolder {
@@ -76,6 +86,15 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    static class FootHolder extends RecyclerView.ViewHolder {
+        private TextView tips;
+
+        public FootHolder(View itemView) {
+            super(itemView);
+            tips = itemView.findViewById(R.id.tips);
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if (viewType == IMAGE_TWOORTHREE) {
@@ -100,7 +119,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
             return viewHolder;
-        } else {
+        } else if (viewType == IMAGE_ONLY_ONE) {
             View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_imageonly_item, viewGroup, false);
             final ImageOnlyOneViewHolder viewHolder = new ImageOnlyOneViewHolder(view);
             viewHolder.mItemView.setOnClickListener(new View.OnClickListener() {
@@ -122,11 +141,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
             return viewHolder;
+        } else {
+            return new FootHolder(LayoutInflater.from(mContext).inflate(R.layout.news_footview_item, null));
         }
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof ImageThreeViewHolder) {
             ((ImageThreeViewHolder) viewHolder).mTv_title.setText(mNewsBeanList.get(position).getTitle());
             ((ImageThreeViewHolder) viewHolder).mTv_company.setText(mNewsBeanList.get(position).getAuthor_name());
@@ -142,6 +163,26 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             Glide.with(mContext).load(mNewsBeanList.get(position).getThumbnail_pic_s()).into(((ImageOnlyOneViewHolder) viewHolder).mIv_image01);
 
+        } else if (viewHolder instanceof FootHolder) {
+            ((FootHolder) viewHolder).tips.setVisibility(View.VISIBLE);
+            if (hasMore == true) {
+                fadeTips = false;
+                if (mNewsBeanList.size() > 0) {
+                    ((FootHolder) viewHolder).tips.setText("正在加载更多...");
+                }
+            } else {
+                if (mNewsBeanList.size() > 0) {
+                    ((FootHolder) viewHolder).tips.setText("没有更多数据了");
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((FootHolder) viewHolder).tips.setVisibility(View.GONE);
+                            fadeTips = true;
+                            hasMore = true;
+                        }
+                    }, 500);
+                }
+            }
         }
         if (viewHolder.getAdapterPosition() > mLastPosition) {
             ObjectAnimator scaleX = ObjectAnimator.ofFloat(viewHolder.itemView, "scaleX", 0.5f, 1f);
@@ -158,10 +199,35 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (mNewsBeanList.get(position).getThumbnail_pic_s03() == null) {
-            return IMAGE_ONLY_ONE;
-        } else {
+        Log.e(TAG, "mNewsBeanList::" + mNewsBeanList.size());
+        Log.e(TAG, "position::" + position);
+        if (mNewsBeanList.get(position).getThumbnail_pic_s03() != null) {
             return IMAGE_TWOORTHREE;
+        } else if (position == getItemCount() - 1) {
+            return FOOTTYPE;
+        } else {
+            return IMAGE_ONLY_ONE;
         }
+
+    }
+
+    public void updateList(List<NewsBean.ResultBean.DataBean> newDatas, boolean hasMore) {
+        if (newDatas != null) {
+            mNewsBeanList.addAll(newDatas);
+        }
+        this.hasMore = hasMore;
+        notifyDataSetChanged();
+    }
+
+    public int getRealLastPosition() {
+        return mNewsBeanList.size();
+    }
+
+    public boolean isFadeTips() {
+        return fadeTips;
+    }
+
+    public void resetDatas() {
+        mNewsBeanList = new ArrayList<>();
     }
 }

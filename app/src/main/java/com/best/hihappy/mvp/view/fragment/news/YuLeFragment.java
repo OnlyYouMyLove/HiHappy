@@ -61,7 +61,7 @@ public class YuLeFragment extends BaseFragment implements NewsView {
             mNewsBeanList.addAll(newsBean.getResult().getData());
         newsRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         newsRecyclerview.addItemDecoration(new MyDividerItemDecoration(getContext(), MyDividerItemDecoration.VERTICAL_LIST));
-        newsRecyclerview.setAdapter(new NewsAdapter(mNewsBeanList, getActivity()));
+        newsRecyclerview.setAdapter(new NewsAdapter(mNewsBeanList, getActivity(),true));
     }
 
     @Override

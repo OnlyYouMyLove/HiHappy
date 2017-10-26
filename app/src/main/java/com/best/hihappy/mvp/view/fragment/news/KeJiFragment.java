@@ -1,12 +1,8 @@
 package com.best.hihappy.mvp.view.fragment.news;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.best.hihappy.R;
 import com.best.hihappy.adapter.NewsAdapter;
@@ -22,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 /**
@@ -35,10 +29,8 @@ public class KeJiFragment extends BaseFragment implements NewsView {
 
     @BindView(R.id.top_recyclerview)
     RecyclerView topRecyclerview;
-    Unbinder unbinder;
     @BindView(R.id.news_progressbar)
     AVLoadingIndicatorView newsProgressbar;
-    Unbinder unbinder1;
 
     private List<NewsBean.ResultBean.DataBean> mNewsBeanList;
     NewsPresenterImpl mNewsPresenter = new NewsPresenterImpl(this);
@@ -66,7 +58,7 @@ public class KeJiFragment extends BaseFragment implements NewsView {
             mNewsBeanList.addAll(newsBean.getResult().getData());
         topRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         topRecyclerview.addItemDecoration(new MyDividerItemDecoration(getContext(), MyDividerItemDecoration.VERTICAL_LIST));
-        topRecyclerview.setAdapter(new NewsAdapter(mNewsBeanList, getActivity()));
+        topRecyclerview.setAdapter(new NewsAdapter(mNewsBeanList, getActivity(),true));
     }
 
     @Override
@@ -86,17 +78,4 @@ public class KeJiFragment extends BaseFragment implements NewsView {
         ToastUtil.getToast("数据请求失败,请重试").show();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
-    }
 }
