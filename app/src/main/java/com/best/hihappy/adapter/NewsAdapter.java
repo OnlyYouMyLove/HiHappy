@@ -29,7 +29,7 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<NewsBean.ResultBean.DataBean> mNewsBeanList;
+    private List<NewsBean.ResultBean.DataBean> mList;
     private Context mContext;
     private int mLastPosition;
     private static final int IMAGE_ONLY_ONE = 1;
@@ -41,7 +41,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "NewsAdapter";
 
     public NewsAdapter(List<NewsBean.ResultBean.DataBean> newsBeanList, Context context, boolean hasMore) {
-        mNewsBeanList = newsBeanList;
+        mList = newsBeanList;
         mContext = context;
         this.hasMore = hasMore;
     }
@@ -104,10 +104,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
-                    String url = mNewsBeanList.get(position).getUrl();
-                    String imageUrl = mNewsBeanList.get(position).getThumbnail_pic_s();
-                    String category = mNewsBeanList.get(position).getCategory();
-                    String title = mNewsBeanList.get(position).getTitle();
+                    Log.e(TAG, "position是::" + position);
+                    String url = mList.get(position).getUrl();
+                    String imageUrl = mList.get(position).getThumbnail_pic_s();
+                    String category = mList.get(position).getCategory();
+                    String title = mList.get(position).getTitle();
                     SonicSessionConfig sessionConfig = new SonicSessionConfig.Builder().build();
                     boolean preloadSuccess = SonicEngine.getInstance().preCreateSession(url, sessionConfig);
                     Intent intent = new Intent(mContext, News_WebView.class);
@@ -126,10 +127,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
-                    String url = mNewsBeanList.get(position).getUrl();
-                    String imageUrl = mNewsBeanList.get(position).getThumbnail_pic_s();
-                    String category = mNewsBeanList.get(position).getCategory();
-                    String title = mNewsBeanList.get(position).getTitle();
+                    Log.e(TAG, "position是::" + position);
+                    String url = mList.get(position).getUrl();
+                    String imageUrl = mList.get(position).getThumbnail_pic_s();
+                    String category = mList.get(position).getCategory();
+                    String title = mList.get(position).getTitle();
                     SonicSessionConfig sessionConfig = new SonicSessionConfig.Builder().build();
                     boolean preloadSuccess = SonicEngine.getInstance().preCreateSession(url, sessionConfig);
                     Intent intent = new Intent(mContext, News_WebView.class);
@@ -148,31 +150,34 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
+
         if (viewHolder instanceof ImageThreeViewHolder) {
-            ((ImageThreeViewHolder) viewHolder).mTv_title.setText(mNewsBeanList.get(position).getTitle());
-            ((ImageThreeViewHolder) viewHolder).mTv_company.setText(mNewsBeanList.get(position).getAuthor_name());
-            ((ImageThreeViewHolder) viewHolder).mTv_time.setText(mNewsBeanList.get(position).getDate());
+            ((ImageThreeViewHolder) viewHolder).mTv_title.setText(mList.get(position).getTitle());
+            ((ImageThreeViewHolder) viewHolder).mTv_company.setText(mList.get(position).getAuthor_name());
+            ((ImageThreeViewHolder) viewHolder).mTv_time.setText(mList.get(position).getDate());
 
-            Glide.with(mContext).load(mNewsBeanList.get(position).getThumbnail_pic_s()).into(((ImageThreeViewHolder) viewHolder).mIv_image01);
-            Glide.with(mContext).load(mNewsBeanList.get(position).getThumbnail_pic_s02()).into(((ImageThreeViewHolder) viewHolder).mIv_image02);
-            Glide.with(mContext).load(mNewsBeanList.get(position).getThumbnail_pic_s03()).into(((ImageThreeViewHolder) viewHolder).mIv_image03);
+            Glide.with(mContext).load(mList.get(position).getThumbnail_pic_s()).into(((ImageThreeViewHolder) viewHolder).mIv_image01);
+            Glide.with(mContext).load(mList.get(position).getThumbnail_pic_s02()).into(((ImageThreeViewHolder) viewHolder).mIv_image02);
+            Glide.with(mContext).load(mList.get(position).getThumbnail_pic_s03()).into(((ImageThreeViewHolder) viewHolder).mIv_image03);
         } else if (viewHolder instanceof ImageOnlyOneViewHolder) {
-            ((ImageOnlyOneViewHolder) viewHolder).mTv_title.setText(mNewsBeanList.get(position).getTitle());
-            ((ImageOnlyOneViewHolder) viewHolder).mTv_company.setText(mNewsBeanList.get(position).getAuthor_name());
-            ((ImageOnlyOneViewHolder) viewHolder).mTv_time.setText(mNewsBeanList.get(position).getDate());
+            ((ImageOnlyOneViewHolder) viewHolder).mTv_title.setText(mList.get(position).getTitle());
+            ((ImageOnlyOneViewHolder) viewHolder).mTv_company.setText(mList.get(position).getAuthor_name());
+            ((ImageOnlyOneViewHolder) viewHolder).mTv_time.setText(mList.get(position).getDate());
 
-            Glide.with(mContext).load(mNewsBeanList.get(position).getThumbnail_pic_s()).into(((ImageOnlyOneViewHolder) viewHolder).mIv_image01);
+            Glide.with(mContext).load(mList.get(position).getThumbnail_pic_s()).into(((ImageOnlyOneViewHolder) viewHolder).mIv_image01);
 
         } else if (viewHolder instanceof FootHolder) {
             ((FootHolder) viewHolder).tips.setVisibility(View.VISIBLE);
             if (hasMore == true) {
                 fadeTips = false;
-                if (mNewsBeanList.size() > 0) {
+                if (mList.size() > 0) {
                     ((FootHolder) viewHolder).tips.setText("正在加载更多...");
+                    Log.e(TAG, "我执行了吗--正在加载更多");
                 }
             } else {
-                if (mNewsBeanList.size() > 0) {
+                if (mList.size() > 0) {
                     ((FootHolder) viewHolder).tips.setText("没有更多数据了");
+                    Log.e(TAG, "我执行了吗--没有更多数据了");
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -180,7 +185,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             fadeTips = true;
                             hasMore = true;
                         }
-                    }, 500);
+                    }, 1000);
                 }
             }
         }
@@ -194,33 +199,39 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mNewsBeanList.size();
+        return mList.size() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        Log.e(TAG, "mNewsBeanList::" + mNewsBeanList.size());
+        Log.e(TAG, "mList::" + mList.size());
         Log.e(TAG, "position::" + position);
-        if (mNewsBeanList.get(position).getThumbnail_pic_s03() != null) {
-            return IMAGE_TWOORTHREE;
-        } else if (position == getItemCount() - 1) {
+
+        if (position == getItemCount() - 1) {
             return FOOTTYPE;
         } else {
-            return IMAGE_ONLY_ONE;
+            if (mList.get(position).getThumbnail_pic_s03() != null) {
+                return IMAGE_TWOORTHREE;
+            } else {
+                return IMAGE_ONLY_ONE;
+            }
         }
-
     }
 
-    public void updateList(List<NewsBean.ResultBean.DataBean> newDatas, boolean hasMore) {
+    public void updateList(int loadrefreshOrLoadmore, List<NewsBean.ResultBean.DataBean> newDatas, boolean hasMore) {
         if (newDatas != null) {
-            mNewsBeanList.addAll(newDatas);
+            if (loadrefreshOrLoadmore == 1) {
+                mList.addAll(0, newDatas);
+            } else {
+                mList.addAll(newDatas);
+            }
         }
         this.hasMore = hasMore;
         notifyDataSetChanged();
     }
 
     public int getRealLastPosition() {
-        return mNewsBeanList.size();
+        return mList.size();
     }
 
     public boolean isFadeTips() {
@@ -228,6 +239,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void resetDatas() {
-        mNewsBeanList = new ArrayList<>();
+        mList = new ArrayList<>();
     }
 }
