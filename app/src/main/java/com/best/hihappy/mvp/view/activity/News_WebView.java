@@ -185,13 +185,6 @@ public class News_WebView extends BaseActivity {
 
             }
         });
-        webview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int x, int y, int oldx, int oldy) {
-
-            }
-
-        });
         // webview is ready now, just tell session client to bind
         if (mSonicSessionClient != null) {
             mSonicSessionClient.bindWebView(webview);
