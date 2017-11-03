@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.best.hihappy.R;
@@ -88,10 +89,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     static class FootHolder extends RecyclerView.ViewHolder {
         private TextView tips;
+        private LinearLayout mLinearLayout;
 
         public FootHolder(View itemView) {
             super(itemView);
             tips = itemView.findViewById(R.id.tips);
+            mLinearLayout = itemView.findViewById(R.id.ll_footview);
         }
     }
 
@@ -167,21 +170,23 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             Glide.with(mContext).load(mList.get(position).getThumbnail_pic_s()).into(((ImageOnlyOneViewHolder) viewHolder).mIv_image01);
 
         } else if (viewHolder instanceof FootHolder) {
-            ((FootHolder) viewHolder).tips.setVisibility(View.VISIBLE);
+            ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.VISIBLE);
             if (hasMore == true) {
                 fadeTips = false;
                 if (mList.size() > 0) {
+                    ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.VISIBLE);
                     ((FootHolder) viewHolder).tips.setText("正在加载更多...");
                     Log.e(TAG, "我执行了吗--正在加载更多");
                 }
             } else {
                 if (mList.size() > 0) {
+                    ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.VISIBLE);
                     ((FootHolder) viewHolder).tips.setText("没有更多数据了");
                     Log.e(TAG, "我执行了吗--没有更多数据了");
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            ((FootHolder) viewHolder).tips.setVisibility(View.GONE);
+                            ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.GONE);
                             fadeTips = true;
                             hasMore = true;
                         }

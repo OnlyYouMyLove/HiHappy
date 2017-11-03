@@ -137,7 +137,6 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void initSMS() {
-        SMSSDK.setAskPermisionOnReadContact(true);
         // 创建EventHandler对象
         EventHandler mEventHandler = new EventHandler() {
             public void afterEvent(int event, int result, Object data) {
@@ -151,7 +150,7 @@ public class LoginActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             }
                         });
 

@@ -33,6 +33,7 @@ public class NewsPresenterImpl implements NewsPresenter {
 
             @Override
             public void onFailed() {
+                mNewsView.hideLoading();
                 mNewsView.showFailedError();
             }
 

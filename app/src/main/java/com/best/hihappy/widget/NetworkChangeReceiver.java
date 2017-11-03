@@ -18,7 +18,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (!NetworkUtil.checkNetworkConnect(context)) {
-            Toast.makeText(context,"没有网络",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "没有网络", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
             alertDialog.setTitle("温馨提示");
             alertDialog.setMessage("请检查网络设置");
@@ -26,14 +26,15 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             alertDialog.setPositiveButton("去设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    Intent intent =  new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
+                    Intent intent = new Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS);
                     context.startActivity(intent);
                 }
             });
             alertDialog.setNegativeButton("退出程序", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                    ActivityCollector.finishAll();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
             alertDialog.show();

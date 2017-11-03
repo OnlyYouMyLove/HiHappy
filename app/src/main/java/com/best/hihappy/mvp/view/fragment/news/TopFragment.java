@@ -36,7 +36,7 @@ public class TopFragment extends BaseFragment implements NewsView, SwipeRefreshL
     @BindView(R.id.top_refresh)
     SwipeRefreshLayout topRefresh;
 
-    private List<NewsBean.ResultBean.DataBean> mNewsBeanList;
+    private List<NewsBean.ResultBean.DataBean> mNewsBeanList = new ArrayList<>();
     NewsPresenterImpl mNewsPresenter = new NewsPresenterImpl(this);
     private static final String TAG = "TopFragment";
     private int lastVisibleItem = 0;
@@ -64,14 +64,17 @@ public class TopFragment extends BaseFragment implements NewsView, SwipeRefreshL
     }
 
     @Override
-    public void getNewsData(NewsBean newsBean) {
-        initData(newsBean);
-        initRecyclerView();
+    protected void initView() {
         initSwipeRefresh();
     }
 
+    @Override
+    public void getNewsData(NewsBean newsBean) {
+        initData(newsBean);
+        initRecyclerView();
+    }
+
     private void initData(NewsBean newsBean) {
-        mNewsBeanList = new ArrayList<>();
         if (mNewsBeanList != null) mNewsBeanList.addAll(newsBean.getResult().getData());
     }
 
@@ -93,24 +96,22 @@ public class TopFragment extends BaseFragment implements NewsView, SwipeRefreshL
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Log.e(TAG,"lastVisibleItem::"+lastVisibleItem);
-                    Log.e(TAG,"adapter.getItemCount()::"+mAdapter.getItemCount());
-                    Log.e(TAG,"mAdapter.getRealLastPosition()::"+mAdapter.getRealLastPosition());
-                    if (mAdapter.isFadeTips() == false && lastVisibleItem+1  == mAdapter.getItemCount()) {
+                    Log.e(TAG, "lastVisibleItem::" + lastVisibleItem);
+                    Log.e(TAG, "adapter.getItemCount()::" + mAdapter.getItemCount());
+                    Log.e(TAG, "mAdapter.getRealLastPosition()::" + mAdapter.getRealLastPosition());
+                    if (mAdapter.isFadeTips() == false && lastVisibleItem + 1 == mAdapter.getItemCount()) {
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Log.e(TAG,"我执行了吗01");
                                 updateRecyclerView(LOADMORE, mAdapter.getRealLastPosition(), mAdapter.getRealLastPosition() + PAGE_COUNT);
                             }
                         }, 500);
                     }
 
-                    if (mAdapter.isFadeTips() == true && lastVisibleItem + 1 == mAdapter.getItemCount()+1) {
+                    if (mAdapter.isFadeTips() == true && lastVisibleItem + 1 == mAdapter.getItemCount() + 1) {
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                Log.e(TAG,"我执行了吗02");
                                 updateRecyclerView(LOADMORE, mAdapter.getRealLastPosition(), mAdapter.getRealLastPosition() + PAGE_COUNT);
                             }
                         }, 500);
@@ -167,13 +168,28 @@ public class TopFragment extends BaseFragment implements NewsView, SwipeRefreshL
     @Override
     public void onRefresh() {
         topRefresh.setRefreshing(true);
-        mAdapter.resetDatas();
-        updateRecyclerView(LOADREFRESH, 0, PAGE_COUNT);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                topRefresh.setRefreshing(false);
-            }
-        }, 1000);
+        if (mNewsBeanList != null)
+            Log.e(TAG, "mNewsBeanList.size：" + mNewsBeanList.size());
+        if (mNewsBeanList.size() == 0) {
+            Log.e(TAG, "有到这里吗");
+            mNewsPresenter.requestData("top");
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    topRefresh.setRefreshing(false);
+                }
+            }, 1000);
+        } else {
+            mAdapter.resetDatas();
+            updateRecyclerView(LOADREFRESH, 0, PAGE_COUNT);
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    topRefresh.setRefreshing(false);
+                }
+            }, 1000);
+        }
+
     }
 }
+
