@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--指定数据库名-->
+    <dbname value="News"></dbname>
+    <!--指定数据库版本号-->
+    <version value="1"></version>
+    <!--指定所有的映射模型-->
+    <list>
+        <mapping class="com.best.hihappy.db.NewsData"></mapping>
+    </list>
+
+</litepal>

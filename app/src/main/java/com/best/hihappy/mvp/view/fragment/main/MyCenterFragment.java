@@ -39,6 +39,8 @@ public class MyCenterFragment extends BaseFragment {
 
     @OnClick(R.id.ll_login)
     public void onViewClicked() {
-        startActivity(new Intent(getActivity(), LoginActivity.class));
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 }

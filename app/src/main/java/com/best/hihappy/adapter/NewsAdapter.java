@@ -107,7 +107,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
-                    Log.e(TAG, "position是::" + position);
                     String url = mList.get(position).getUrl();
                     String imageUrl = mList.get(position).getThumbnail_pic_s();
                     String category = mList.get(position).getCategory();
@@ -130,7 +129,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     int position = viewHolder.getAdapterPosition();
-                    Log.e(TAG, "position是::" + position);
                     String url = mList.get(position).getUrl();
                     String imageUrl = mList.get(position).getThumbnail_pic_s();
                     String category = mList.get(position).getCategory();
@@ -176,13 +174,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 if (mList.size() > 0) {
                     ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.VISIBLE);
                     ((FootHolder) viewHolder).tips.setText("正在加载更多...");
-                    Log.e(TAG, "我执行了吗--正在加载更多");
                 }
             } else {
                 if (mList.size() > 0) {
                     ((FootHolder) viewHolder).mLinearLayout.setVisibility(View.VISIBLE);
                     ((FootHolder) viewHolder).tips.setText("没有更多数据了");
-                    Log.e(TAG, "我执行了吗--没有更多数据了");
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -209,8 +205,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        Log.e(TAG, "mList::" + mList.size());
-        Log.e(TAG, "position::" + position);
 
         if (position == getItemCount() - 1) {
             return FOOTTYPE;

@@ -8,6 +8,9 @@ import com.mob.MobSDK;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
 
+import org.litepal.LitePal;
+import org.litepal.tablemanager.Connector;
+
 /**
  * Created by FuKaiqiang on 2017-08-25.
  */
@@ -29,6 +32,19 @@ public class MyApplication extends Application {
         initContext();
 //        initLeakCanary();
         initSonic();
+        initLitePal();
+        createDataBase();
+    }
+
+    /**
+     * 创建数据库
+     */
+    private void createDataBase() {
+        Connector.getDatabase();
+    }
+
+    private void initLitePal() {
+        LitePal.initialize(this);
     }
 
     private void initShareSdk() {

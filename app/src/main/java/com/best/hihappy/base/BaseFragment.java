@@ -2,11 +2,16 @@ package com.best.hihappy.base;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.best.hihappy.adapter.NewsAdapter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -21,6 +26,16 @@ public abstract class BaseFragment extends Fragment {
     protected boolean isVisible = false;
     protected boolean isFirst = true;
     protected View mView;
+    protected Handler mHandler = new Handler(Looper.getMainLooper());
+
+    protected final int PAGE_COUNT = 10;
+    protected static int LOADMORE = 2;
+    protected int lastVisibleItem = 0;
+    protected static int LOADREFRESH = 1;
+
+    protected LinearLayoutManager mManager;
+    protected NewsAdapter mAdapter;
+
 
     //根据Fragment的生命周期，先回调setUserVisibleHint，再回调onCreateView，所以先看setUserVisibleHint方法
     @Override
@@ -46,7 +61,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void LoadData();
 
-    protected void initView() {}
+    protected void initView() {
+    }
 
     @Override
     public void onDestroyView() {
