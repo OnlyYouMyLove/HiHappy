@@ -20,6 +20,16 @@ android {
     }
     productFlavors {
     }
+
+    productFlavors {
+        all32 { minSdkVersion 17 }
+        all64 { minSdkVersion 21 }
+    }
+
+    sourceSets.main {
+        res.srcDirs = ['src/main/res']
+        jniLibs.srcDirs = ['src/main/jniLibs']
+    }
 }
 
 repositories {
@@ -72,4 +82,6 @@ dependencies {
     compile name: 'SMSSDKGUI-3.0.0', ext: 'aar'
     //greendao
     compile 'org.litepal.android:core:1.6.0'
+    //ijkplayer
+    compile project(':ijkplayer-java')
 }

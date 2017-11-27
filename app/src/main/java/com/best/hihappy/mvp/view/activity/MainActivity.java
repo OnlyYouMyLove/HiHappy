@@ -85,14 +85,14 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void exit(){
+    public void exit() {
         if (!isExit) {
             isExit = true;
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "再按一次退出", Toast.LENGTH_SHORT).show();
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
             ActivityCollector.finishAll();
-            android.os.Process.killProcess(android.os.Process.myPid());
+            this.overridePendingTransition(0, R.anim.activity_close);
         }
     }
 }

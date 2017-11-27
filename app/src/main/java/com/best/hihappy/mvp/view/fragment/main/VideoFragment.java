@@ -1,24 +1,50 @@
 package com.best.hihappy.mvp.view.fragment.main;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.best.hihappy.R;
+import com.best.hihappy.adapter.LiveFragmentAdapter;
+import com.best.hihappy.base.BaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 
 /**
  * Created by FuKaiqiang on 2017-06-12.
  */
 
-public class VideoFragment extends Fragment {
-    @Nullable
+public class VideoFragment extends BaseFragment {
+
+    @BindView(R.id.rv_video)
+    RecyclerView rvVideo;
+    private List<String> mList = new ArrayList<>();
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.videofragment_layout, container, false);
-        return view;
+    protected int getLayoutResource() {
+        return R.layout.videofragment_layout;
+    }
+
+    @Override
+    protected void initView() {
+        mList.add("Hello");
+        mList.add("World");
+        mList.add("Hello");
+        mList.add("World");
+        mList.add("Hello");
+        mList.add("World");
+        mList.add("Hello");
+        mList.add("World");
+        rvVideo.setLayoutManager(new LinearLayoutManager(getContext()));
+        LiveFragmentAdapter adapter = new LiveFragmentAdapter(mList);
+        rvVideo.setAdapter(adapter);
+    }
+
+    @Override
+    protected void LoadData() {
+
     }
 }
