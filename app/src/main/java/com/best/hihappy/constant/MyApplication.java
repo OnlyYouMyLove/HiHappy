@@ -3,6 +3,7 @@ package com.best.hihappy.constant;
 import android.app.Application;
 import android.content.Context;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.best.hihappy.sonic.SonicRuntimeImpl;
 import com.mob.MobSDK;
 import com.tencent.sonic.sdk.SonicConfig;
@@ -17,7 +18,7 @@ import org.litepal.tablemanager.Connector;
 
 public class MyApplication extends Application {
 
-    private static Context mContext;
+    private Context mContext;
 //    private RefWatcher refWatcher;
 
 //    public static RefWatcher getRefWatcher(Context context) {
@@ -34,6 +35,7 @@ public class MyApplication extends Application {
         initSonic();
         initLitePal();
         createDataBase();
+        FeedbackAPI.init(this, Constants.DEFAULT_APPKEY, Constants.DEFAULT_APPSECRET);
     }
 
     /**
@@ -69,7 +71,7 @@ public class MyApplication extends Application {
 //    }
 
     //单例模式获取上下文
-    public static Context getContext() {
+    public Context getContext() {
         return mContext;
     }
 }

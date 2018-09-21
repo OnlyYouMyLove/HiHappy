@@ -56,7 +56,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         initSMS();
         initCheck();
     }

@@ -27,6 +27,7 @@ import butterknife.BindView;
  */
 
 public class TopFragment extends BaseFragment implements NewsView, SwipeRefreshLayout.OnRefreshListener {
+    
 
     @BindView(R.id.top_recyclerview)
     RecyclerView newsRecyclerview;

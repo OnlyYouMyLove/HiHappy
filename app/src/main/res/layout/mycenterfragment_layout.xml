@@ -36,11 +36,11 @@
                 android:src="@drawable/mycenter_setting"/>
 
             <LinearLayout
-                android:clickable="true"
                 android:id="@+id/ll_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:clickable="true"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -152,6 +152,7 @@
             android:background="@color/littlegrey"></View>
 
         <LinearLayout
+            android:id="@+id/ll_feedback"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y35">
 
@@ -160,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/x20"
-                android:text="看天气"
+                android:text="用户反馈"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
         </LinearLayout>
